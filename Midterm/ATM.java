@@ -21,13 +21,13 @@ public class ATM {
 
             switch (choice) {
                 case 1:
-                    CheckBalance.checkBalance(user.getBalance());
+                    CheckBalance.checkBalance(user);
                     break;
                 case 2:
-                    Withdraw.withdraw(user.getBalance());
+                    Withdraw.withdraw(user);
                     break;
                 case 3:
-                    Deposit.deposit(user.getBalance());
+                    Deposit.deposit(user);
                     break;
                 case 4:
                     quit = true;
@@ -40,6 +40,5 @@ public class ATM {
         }
 
         System.out.println("Thank you for using the ATM");
-        scanner.close();
     }
 }
