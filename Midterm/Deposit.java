@@ -11,8 +11,9 @@ public abstract class Deposit implements Transaction {
 	    double amount = scanner.nextDouble();
 	    double balance = user.getBalance();
 
-	    balance += amount;
-	    System.out.println("Deposit successful. Current balance: $" + balance);
+	    double newBalance = balance + amount;
+	    user.setBalance(newBalance);
+	    System.out.println("Deposit successful. Current balance: $" + user.getBalance());
 	    
 	}
 }
