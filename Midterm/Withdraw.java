@@ -14,7 +14,8 @@ public abstract class Withdraw implements Transaction {
 		if (amount > balance) {
 	        System.out.println("Insufficient funds.");
 	    } else {
-	        balance -= amount;
+	        double newBalance = balance - amount;
+	        user.setBalance(newBalance);
 	        System.out.println("Withdrawal successful. Remaining balance: $" + user.getBalance());
 	    }
 		
