@@ -4,9 +4,11 @@ import java.util.Scanner;
 import java.util.InputMismatchException;
 
 public class ATM {
-
+    
     public static void main(String[] args) {
-    	
+    	System.out.println("Welcome to the Simmons Bank ATM!");
+    	System.out.println("What would you like to do today?");
+        
     	Scanner scanner = new Scanner(System.in);
         boolean quit = false;
 
