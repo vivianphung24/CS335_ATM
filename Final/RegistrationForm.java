@@ -10,11 +10,10 @@ public class RegistrationForm {
         // Array to store user details
         String[][] users = new String[10][3];
         int userCount = 0;
-        
-        while (true) {
-            System.out.println("Please Fill Out This Registration Form");
-            System.out.println("-----------------");
-            
+        System.out.println("Please Fill Out This Registration Form");
+        System.out.println("-----------------");
+     
+        while (true) {  
             // Get username
             System.out.print("Create a Username: ");
             String username = scanner.nextLine();
