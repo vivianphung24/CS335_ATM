@@ -5,7 +5,8 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Random;
 import java.io.*;
-
+import java.io.File;  // Import the File class
+import java.io.IOException;
 
 public class LoginReg implements Serializable{
 	public String usern;
@@ -17,8 +18,8 @@ public class LoginReg implements Serializable{
         this.pass = pass;
         this.account = account;
     }
- 
-	static Map<String, ArrayList<String>> users = new HashMap<String, ArrayList<String>>();
+    static HashMap<String, String> users = new HashMap<String, String>();
+	//static Map<String, ArrayList<String>> users = new HashMap<String, ArrayList<String>>();
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -43,19 +44,20 @@ public class LoginReg implements Serializable{
                     System.out.println("Invalid choice");
             
             }
-            try{
-                FileInputStream readData = new FileInputStream("userLogin.ser");
-                ObjectInputStream readStream = new ObjectInputStream(readData);
+             try{
+            	FileInputStream readData = new FileInputStream("userLogin.ser");
+            	ObjectInputStream readStream = new ObjectInputStream(readData);
 
-                Map<String, ArrayList<String>> users2 =(Map<String, ArrayList<String>>)users;
+            	HashMap<String, String> users2 = users;
                 readStream.readObject();
 
-                readStream.close();
+                //readStream.close();
 
-                System.out.println(users2.toString());
+       
             }catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
+          
         }
         scanner.close();
     }
@@ -68,7 +70,7 @@ public class LoginReg implements Serializable{
         // Get username
         System.out.print("Create a Username: ");
         String username = scanner.nextLine();
-        users.put(username, new ArrayList<String>());
+       
         
         while (true) { 
         // Get password
@@ -91,11 +93,10 @@ public class LoginReg implements Serializable{
            continue; 
         }
      // Generate random 3-digit number for the account number
-        int randomNumber = random.nextInt(900) + 100;
+       // int randomNumber = random.nextInt(900) + 100;
         
-   
-        users.get(username).add(password);
-        users.get(username).add(Integer.toString(randomNumber)); 
+        users.put(username, password); 
+       // users.get(username).add(Integer.toString(randomNumber)); 
         
         try{
             FileOutputStream writeData = new FileOutputStream("userLogin.ser");
@@ -111,14 +112,10 @@ public class LoginReg implements Serializable{
             e.printStackTrace();
         }
         
-        
-   
-       
         System.out.println("\nRegistration successful.\n");
         break; 
         }
       
-        
         
     }
       
@@ -128,12 +125,15 @@ public class LoginReg implements Serializable{
         String username = scanner.nextLine();
         System.out.println("Enter your password:");
         String password = scanner.nextLine();
+        
         if (!users.containsKey(username)) {
-            System.out.println("Invalid username or password.\n");
-        } else {
+            System.out.println("Invalid username.\n");
+        } 
+        else {
             if (users.get(username).equals(password)) {
                 System.out.println("Login successful.\n");
-            } else {
+            } 
+            else { 
                 System.out.println("Invalid username or password.\n");
             }
         }
