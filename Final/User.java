@@ -6,10 +6,10 @@ public class User {
 	double checkingBal;
 	double savingsBal; 
 	
-	public User(double b,double s, String string) {
+	public User(double c,double s) {
 		// name = n;  String n, String pw as parameters once login class is integrated
 		// password = pw;
-		checkingBal = b;
+		checkingBal = c;
 		savingsBal = s; 
 	}
 	
@@ -18,7 +18,7 @@ public class User {
 		return name;
 	}
 	
-	public double getCheckBalance() {
+	public double getCheckingBalance() {
 		return checkingBal;
 	}
 	
@@ -30,7 +30,7 @@ public class User {
 		this.name=n;
 	}
 	
-	public void setCheckBalance(double b) {
+	public void setCheckingBalance(double b) {
 		this.checkingBal=b;
 	}
 	
