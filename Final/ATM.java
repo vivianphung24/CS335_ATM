@@ -20,13 +20,15 @@ public class ATM {
         User user;
 
         if (accountChoice == 1) {
-            user = new User(1000.0, "checkings");
+            user = new User(1000.0, 0);          // for now, start off with 1000 in account were dealing with
         } else if (accountChoice == 2) {
-            user = new User(1000.0, "savings");
+            user = new User(0, 1000.0);
         } else {
             System.out.println("Error: Invalid account choice");
             return;
         }
+
+        TransactionHistory transaction = new TransactionHistory(); // Create an instance of the Transaction class
 
         System.out.println("What would you like to do today?");
 
@@ -49,10 +51,12 @@ public class ATM {
                         CheckBalance.checkBalance(user);
                         break;
                     case 2:
-                        Withdraw.withdraw(user);
+                        double withdrawAmount = Withdraw.withdraw(user);
+                        transaction.addTransaction("Withdrawn: " + withdrawAmount); // Add the transaction to the Transaction object
                         break;
                     case 3:
-                        Deposit.deposit(user);
+                        double depositAmount = Deposit.deposit(user);
+                        transaction.addTransaction("Deposited: " + depositAmount); // Add the transaction to the Transaction object
                         break;
                     case 4:
                         Transfer.transfer(user);
@@ -71,6 +75,9 @@ public class ATM {
 
             System.out.println();
         }
+
+        transaction.printTransactions(); // Print all the transactions made by the user
+
         System.out.println("Thank you for using the ATM");
     }
 }
