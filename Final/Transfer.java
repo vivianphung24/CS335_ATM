@@ -2,7 +2,7 @@ package banking;
 
 import java.util.Scanner;
 
-public class Transfer {
+public class Transfer implements Transaction{
 
     public static void transfer(User user) {
         Scanner scanner = new Scanner(System.in);
@@ -32,14 +32,13 @@ public class Transfer {
         System.out.print("Enter the amount to transfer: ");
         double amount = scanner.nextDouble();
 
-        if (amount <= user.getBalance()) {
-            user.setBalance(user.getBalance() - amount);
-            System.out.println("Transfer successful. New checkings balance: $" + user.getBalance());
+        if (amount <= user.getCheckingBalance()) {
+            user.setCheckingBalance(user.getCheckingBalance() - amount);
+            System.out.println("Transfer successful. New checkings balance: $" + user.getCheckingBalance());
 
             // Update savings account balance
-            User savingsAccount = Savings(user);
-            savingsAccount.setBalance(savingsAccount.getBalance() + amount);
-            System.out.println("New savings balance: $" + savingsAccount.getBalance());
+            user.setSavingsBalance(user.getSavingsBalance() + amount);
+            System.out.println("New savings balance: $" + user.getSavingsBalance());
         } else {
             System.out.println("Error: Insufficient funds in checkings account");
         }
@@ -51,27 +50,27 @@ public class Transfer {
         System.out.print("Enter the amount to transfer: ");
         double amount = scanner.nextDouble();
 
-        User savingsAccount = Savings(user);
+        //User savingsAccount = Savings(user);
 
-        if (amount <= savingsAccount.getBalance()) {
-            savingsAccount.setBalance(savingsAccount.getBalance() - amount);
-            System.out.println("Transfer successful. New savings balance: $" + savingsAccount.getBalance());
+        if (amount <= user.getSavingsBalance()) {
+            user.setSavingsBalance(user.getSavingsBalance() - amount);
+            System.out.println("Transfer successful. New savings account balance: $" + user.getSavingsBalance());
 
-            // Update checkings account balance
-            user.setBalance(user.getBalance() + amount);
-            System.out.println("New checkings balance: $" + user.getBalance());
+            // Update checking account balance
+            user.setCheckingBalance(user.getCheckingBalance() + amount);
+            System.out.println("New checking account balance: $" + user.getCheckingBalance());
         } else {
             System.out.println("Error: Insufficient funds in savings account");
         }
     }
 
-    private static User Savings(User user) {
-        // Assuming the savings account is created with the same name as the checkings account
+    /*private static User Savings(User user) {
+        // Assuming the savings account is created with the same name as the checking account
         String savingsAcct = user.getName() + "_savings";
 
         User savingsAccount = new User(1000.0, savingsAcct);
         // You can add additional code here to retrieve the actual savings account from a database or another source
 
         return savingsAccount;
-    }
+    }*/
 }
