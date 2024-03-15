@@ -18,17 +18,19 @@ public abstract class Deposit implements Transaction {
 		
 		if (choice == 1) {
 			double balance = user.getCheckingBalance();
-			balance += amount;
-		    System.out.println("Deposit successful. Current balance: $" + balance);
+			double newBalance = balance + amount;
+			user.setCheckingBalance(newBalance);
+		    System.out.println("Deposit successful. Current balance: $" + user.getCheckingBalance());
         } else if (choice == 2) {
         	double balance = user.getSavingsBalance();
-        	balance += amount;
-    	    System.out.println("Deposit successful. Current balance: $" + balance);
+        	double newBalance = balance + amount;
+			user.setSavingsBalance(newBalance);
+    	    System.out.println("Deposit successful. Current balance: $" + user.getCheckingBalance());
         } else {
             System.out.println("Error: Invalid account choice");
         }
 	    
-		return 0;	    
+		return 0;	 	    
 	  
 	}
 }
