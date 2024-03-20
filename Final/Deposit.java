@@ -25,7 +25,7 @@ public abstract class Deposit implements Transaction {
         	double balance = user.getSavingsBalance();
         	double newBalance = balance + amount;
 			user.setSavingsBalance(newBalance);
-    	    System.out.println("Deposit successful. Current balance: $" + user.getCheckingBalance());
+    	    System.out.println("Deposit successful. Current balance: $" + user.getSavingsBalance());
         } else {
             System.out.println("Error: Invalid account choice");
         }
