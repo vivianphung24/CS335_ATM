@@ -64,13 +64,4 @@ public class Transfer implements Transaction{
         }
     }
 
-    /*private static User Savings(User user) {
-        // Assuming the savings account is created with the same name as the checking account
-        String savingsAcct = user.getName() + "_savings";
-
-        User savingsAccount = new User(1000.0, savingsAcct);
-        // You can add additional code here to retrieve the actual savings account from a database or another source
-
-        return savingsAccount;
-    }*/
 }
