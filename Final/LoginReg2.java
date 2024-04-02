@@ -19,7 +19,7 @@ public class LoginReg2{
     static FileOutputStream fileOut = null;
     static FileInputStream fileIn = null;
     static Properties props = new Properties();
-    static File ufile = new File ("/Users/vivianphung/eclipse-workspace/newer ATM/src/banking/accounts.properties"); 
+    static File ufile = new File ("/Users/nyah/eclipse-workspace/ATM_1/src/ATM/accounts.properties"); 
 
     public static void main(String[] args) throws IOException {
     	
@@ -37,10 +37,16 @@ public class LoginReg2{
                     registerUser(scanner);
                     break;
                 case 2:
-                    if (loginUser(scanner)) {
-                        ATM2.main(args);
-                        return;
-                    }
+                    /**if (loginUser(scanner)) {
+                        ATM.main(args);
+                        return;**/
+                	
+                	User user = loginUser(scanner);
+                	if (user != null) {
+                		System.out.println("Welcome, " + user.getName() + "!");
+                		ATM.main(args);
+                		return;
+                	}
                     break;
                 case 3:
                     break;
@@ -94,7 +100,10 @@ public class LoginReg2{
                 System.out.println("Passwords do not match. Please try again.");
                 continue;
             }
-
+            
+            User user = new User(0,0);   //might change later to make them make a deposit at registration
+            user.setName(username);
+            user.setPassword(password);
             users.put(username, password);
             
 
@@ -117,7 +126,7 @@ public class LoginReg2{
         }
     }
 
-    static boolean loginUser(Scanner scanner) throws IOException {
+    static User loginUser(Scanner scanner) throws IOException {
     	fileIn =new FileInputStream(ufile); 
     	props.load(fileIn);
     	fileIn.close(); 
@@ -126,7 +135,7 @@ public class LoginReg2{
         System.out.println("Enter your password:");
         String password = scanner.nextLine();
         
-        if (!props.containsKey(username)) {
+        /**if (!props.containsKey(username)) {
             System.out.println("Invalid username.\n");
         } else {
             if (props.get(username).equals(password)) {
@@ -136,7 +145,20 @@ public class LoginReg2{
                 System.out.println("Invalid username or password.\n");
             }
         }
-        return false;
+        return false;**/
+        
+        if (users.containsKey(username)) {
+        	User user = null;       // have to read in from file their account information
+        	user.setName(username);
+        	if (user.getPassword().equals(password)) {
+        		System.out.println("Login successful.\n");
+        		return user;
+        	}
+        	
+        }
+        System.out.println("Invalid username or password.\n");
+        return null;
+        
     }
 
     @Override
