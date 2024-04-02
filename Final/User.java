@@ -9,8 +9,8 @@ public class User {
 	public User(double c,double s) {
 		// name = n;  String n, String pw as parameters once login class is integrated
 		// password = pw;
-		checkingBal = c;
-		savingsBal = s; 
+		this.checkingBal = c;
+		this.savingsBal = s; 
 	}
 	
 	// getters and setters; toString
@@ -26,8 +26,16 @@ public class User {
 		return savingsBal; 
 	}
 	
+	public String getPassword() {
+		return password;
+	}
+	
 	public void setName(String n) {
 		this.name=n;
+	}
+	
+	public void setPassword(String pw) {
+		this.password=pw;
 	}
 	
 	public void setCheckingBalance(double b) {
