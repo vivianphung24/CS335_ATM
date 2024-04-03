@@ -24,6 +24,7 @@ public class LoginReg2{
     }
 
     static Map<String, String> users = new HashMap<>();
+    static Set<String> existingUsernames = new HashSet<>();  // Store existing usernames
     
     static FileOutputStream fileOut = null;
     static FileInputStream fileIn = null;
@@ -31,6 +32,17 @@ public class LoginReg2{
     static File ufile = new File ("/Users/nyah/eclipse-workspace/ATM_1/src/ATM/account.properties"); 
 
     public static void main(String[] args) throws IOException {
+    	
+    	// Load existing usernames from account.properties file
+    	try {
+    		fileIn = new FileInputStream(ufile);
+    		props.load(fileIn);
+    		existingUsernames.addAll(props.stringPropertyNames());
+    		fileIn.close();
+    	} catch (IOException e) {
+    		e.printStackTrace();
+    	}
+    	
     	
         Scanner scanner = new Scanner(System.in);
         int choice = 0;
@@ -90,8 +102,18 @@ public class LoginReg2{
         System.out.println("-----------------");
 
         // Get username
-        System.out.print("Create a Username: ");
-        String username = scanner.nextLine();
+        String username;
+        while (true) {
+        	System.out.print("Create a Username: ");
+            username = scanner.nextLine();
+            
+            // Check if username already exists
+            if (existingUsernames.contains(username)) {
+            	System.out.println("Username taken. Please try again.");
+            } else {
+            	break;
+            }
+        }
 
         while (true) {
             // Get password
