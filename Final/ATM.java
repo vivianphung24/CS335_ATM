@@ -2,19 +2,27 @@ package banking;
 
 import java.util.Scanner;
 import java.util.InputMismatchException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.ArrayList;
+import java.util.Random;
+// Import the File class
+import java.io.*;
 
 public class ATM {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
-        System.out.println("Welcome to the Simmons Bank ATM!");
+    	Scanner scanner = new Scanner(System.in);
+    	System.out.println("Welcome to the Simmons Bank ATM!");
+    	//User user = LoginReg2.loginUser(scanner);
+    	User user = LoginReg2.getUser();
 
-        System.out.println("Select an account:");
+       /** System.out.println("Select an account:");
         System.out.println("1. Checkings Account");
         System.out.println("2. Savings Account");
         System.out.print("Enter your choice: ");
 
-        Scanner scanner = new Scanner(System.in);
         int accountChoice = scanner.nextInt();
 
         User user;
@@ -26,7 +34,7 @@ public class ATM {
         } else {
             System.out.println("Error: Invalid account choice");
             return;
-        }
+        }    **/
 
         TransactionHistory transaction = new TransactionHistory(); // Create an instance of the Transaction class
 
