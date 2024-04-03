@@ -13,13 +13,22 @@ public class LoginReg2{
         this.account = account;
        
     }
+    
+    // user methods to be accessed by ATM file
+    private static User user;
+    public static void setUser(User newUser) {
+    	user=newUser;
+    }
+    public static User getUser() {
+    	return(user);
+    }
 
     static Map<String, String> users = new HashMap<>();
     
     static FileOutputStream fileOut = null;
     static FileInputStream fileIn = null;
     static Properties props = new Properties();
-    static File ufile = new File ("/Users/nyah/eclipse-workspace/ATM_1/src/ATM/accounts.properties"); 
+    static File ufile = new File ("/Users/nyah/eclipse-workspace/ATM_1/src/ATM/account.properties"); 
 
     public static void main(String[] args) throws IOException {
     	
@@ -37,13 +46,14 @@ public class LoginReg2{
                     registerUser(scanner);
                     break;
                 case 2:
-                    /**if (loginUser(scanner)) {
+                    /** if (loginUser(scanner)) {
                         ATM.main(args);
-                        return;**/
+                        return; **/
                 	
                 	User user = loginUser(scanner);
                 	if (user != null) {
                 		System.out.println("Welcome, " + user.getName() + "!");
+                		LoginReg2.setUser(user);
                 		ATM.main(args);
                 		return;
                 	}
@@ -72,6 +82,9 @@ public class LoginReg2{
     }
 
     static void registerUser(Scanner scanner) {
+    	String upath = "/Users/nyah/eclipse-workspace/ATM_1/src/ATM/userfiles/";
+    	String file_ext = ".txt";
+    	
         Random random = new Random();
         System.out.println("\nPlease Fill Out This Registration Form");
         System.out.println("-----------------");
@@ -101,7 +114,25 @@ public class LoginReg2{
                 continue;
             }
             
-            User user = new User(0,0);   //might change later to make them make a deposit at registration
+            // deposit initial balances
+            System.out.println("How much would you like to deposit into your checking accoount? ");
+            double checkingBalance = scanner.nextDouble();
+            System.out.println("How much would you like to deposit into your savings account? ");
+            double savingsBalance = scanner.nextDouble();
+            
+            // create new user file
+            String fname = upath + username + file_ext;
+            try (FileWriter filewriter = new FileWriter(fname)) {
+            	filewriter.write("Checking: " + checkingBalance + "\n");
+                filewriter.write("Savings: " + savingsBalance + "\n");
+            } catch (IOException e) {
+            	e.printStackTrace();
+            	System.out.println("Error creating user file: " + e.getMessage());
+            	return;
+            }
+            
+            
+            User user = new User(checkingBalance,savingsBalance);
             user.setName(username);
             user.setPassword(password);
             users.put(username, password);
@@ -147,21 +178,46 @@ public class LoginReg2{
         }
         return false;**/
         
-        if (users.containsKey(username)) {
-        	User user = null;       // have to read in from file their account information
+        String upath = "/Users/nyah/eclipse-workspace/ATM_1/src/ATM/userfiles/";
+    	String file_ext = ".txt";
+        String fname = upath + username + file_ext;
+        try (Scanner fileScanner = new Scanner(new File(fname))) {
+        	double checkingBalance = Double.parseDouble(fileScanner.nextLine().split(": ")[1]);
+        	double savingsBalance = Double.parseDouble(fileScanner.nextLine().split(": ")[1]);
+        	User user = new User(checkingBalance, savingsBalance);
+        	if (users.containsKey(username)) {
+            	//User user = new User(checkingBalance, savingsBalance);       // have to read in from file their account information
+            	user.setName(username);
+            	String rpassword = users.get(username);
+            	user.setPassword(rpassword);
+            	if (user.getPassword().equals(password)) {
+            		System.out.println("Login successful.\n");
+            		return user;
+            	}
+        	}
+        } catch (FileNotFoundException e) {
+        	System.out.println("User not found. Make sure to register first as a new user.");
+        }
+        
+        /**if (users.containsKey(username)) {
+        	//User user = new User(checkingBalance, savingsBalance);       // have to read in from file their account information
         	user.setName(username);
         	if (user.getPassword().equals(password)) {
         		System.out.println("Login successful.\n");
         		return user;
-        	}
+        	}**/
         	
-        }
-        System.out.println("Invalid username or password.\n");
-        return null;
         
+        System.out.println("Invalid username or password.\n");
+        return null;        // FIX LATER
     }
 
-    @Override
+    private static Object Readable (String fname) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
     public String toString() {
         return "Users{" +
                 "Username='" + usern + '\'' +
