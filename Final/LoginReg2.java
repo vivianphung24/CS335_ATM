@@ -43,6 +43,18 @@ public class LoginReg2{
     		e.printStackTrace();
     	}
     	
+    	try {
+    		fileIn = new FileInputStream(ufile);
+            props.load(fileIn);
+            for (String uname : props.stringPropertyNames()) {
+            	String pw = props.getProperty(uname);
+            	users.put(uname, pw);
+            }
+            fileIn.close(); 
+    	} catch (IOException e) {
+            e.printStackTrace();
+        }
+    	
     	
         Scanner scanner = new Scanner(System.in);
         int choice = 0;
@@ -98,6 +110,7 @@ public class LoginReg2{
     	String file_ext = ".txt";
     	
         Random random = new Random();
+        System.out.println(users);
         System.out.println("\nPlease Fill Out This Registration Form");
         System.out.println("-----------------");
 
@@ -162,19 +175,25 @@ public class LoginReg2{
 
             try {
                 
-                fileIn = new FileInputStream(ufile);
+                /** fileIn = new FileInputStream(ufile);
                 props.load(fileIn);
-                props.putAll(users);
+                for (String uname : props.stringPropertyNames()) {
+                	String pw = props.getProperty(uname);
+                	users.put(uname, pw);
+                }
+                fileIn.close(); MOVED TO THE TOP **/
+                // props.putAll(users);
                 fileOut = new FileOutputStream(ufile,true);
                 props.store(fileOut, "usernames");
-                fileIn.close(); 
                 fileOut.close();
                 
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            
 
             System.out.println("\nRegistration successful.\n");
+            System.out.println(users);
             break;
         }
     }
@@ -187,6 +206,7 @@ public class LoginReg2{
         String username = scanner.nextLine();
         System.out.println("Enter your password:");
         String password = scanner.nextLine();
+        System.out.println(users);
         
         /**if (!props.containsKey(username)) {
             System.out.println("Invalid username.\n");
@@ -228,7 +248,7 @@ public class LoginReg2{
         		System.out.println("Login successful.\n");
         		return user;
         	}**/
-        	
+        System.out.println(users);
         
         System.out.println("Invalid username or password.\n");
         return null;        // FIX LATER
