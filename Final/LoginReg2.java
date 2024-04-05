@@ -1,4 +1,4 @@
-package banking;
+package ATM;
 import java.io.*;
 import java.util.*;
 
@@ -29,7 +29,7 @@ public class LoginReg2{
     static FileOutputStream fileOut = null;
     static FileInputStream fileIn = null;
     static Properties props = new Properties();
-    static File ufile = new File ("/Users/nyah/eclipse-workspace/ATM_1/src/ATM/account.properties"); 
+    static File ufile = new File ("/Users/nyah/eclipse-workspace/ATM_1/src/ATM/account.properties");  // change into relative path
 
     public static void main(String[] args) throws IOException {
     	
@@ -106,7 +106,7 @@ public class LoginReg2{
     }
 
     static void registerUser(Scanner scanner) {
-    	String upath = "/Users/nyah/eclipse-workspace/ATM_1/src/ATM/userfiles/";
+    	String upath = "/Users/nyah/eclipse-workspace/ATM_1/src/ATM/userfiles/";   // change into relative path
     	String file_ext = ".txt";
     	
         Random random = new Random();
@@ -170,6 +170,7 @@ public class LoginReg2{
             User user = new User(checkingBalance,savingsBalance);
             user.setName(username);
             user.setPassword(password);
+            props.setProperty(username, password);
             users.put(username, password);
             
 
