@@ -1,4 +1,4 @@
-package ATM;
+package banking;
 
 import java.util.Scanner;
 import java.util.InputMismatchException;
