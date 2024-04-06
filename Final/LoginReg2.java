@@ -1,4 +1,4 @@
-package ATM;
+package banking;
 import java.io.*;
 import java.util.*;
 
@@ -14,6 +14,7 @@ public class LoginReg2{
        
     }
     
+    
     // user methods to be accessed by ATM file
     private static User user;
     public static void setUser(User newUser) {
@@ -23,13 +24,14 @@ public class LoginReg2{
     	return(user);
     }
 
+    
     static Map<String, String> users = new HashMap<>();
-    static Set<String> existingUsernames = new HashSet<>();  // Store existing usernames
+    static Set<String> existingUsernames = new HashSet<>();   // Store existing usernames
     
     static FileOutputStream fileOut = null;
     static FileInputStream fileIn = null;
     static Properties props = new Properties();
-    static File ufile = new File ("/Users/nyah/eclipse-workspace/ATM_1/src/ATM/account.properties");  // change into relative path
+    static File ufile = new File ("src/ATM/account.properties");
 
     public static void main(String[] args) throws IOException {
     	
@@ -43,6 +45,7 @@ public class LoginReg2{
     		e.printStackTrace();
     	}
     	
+    	// load all existing users from properties file into users map
     	try {
     		fileIn = new FileInputStream(ufile);
             props.load(fileIn);
@@ -55,7 +58,7 @@ public class LoginReg2{
             e.printStackTrace();
         }
     	
-    	
+    	// MAIN
         Scanner scanner = new Scanner(System.in);
         int choice = 0;
         while (choice != 3) {
@@ -76,7 +79,6 @@ public class LoginReg2{
                 	
                 	User user = loginUser(scanner);
                 	if (user != null) {
-                		System.out.println("Welcome, " + user.getName() + "!");
                 		LoginReg2.setUser(user);
                 		ATM.main(args);
                 		return;
@@ -106,10 +108,10 @@ public class LoginReg2{
     }
 
     static void registerUser(Scanner scanner) {
-    	String upath = "/Users/nyah/eclipse-workspace/ATM_1/src/ATM/userfiles/";   // change into relative path
+    	String upath = "src/ATM/userfiles/";
     	String file_ext = ".txt";
     	
-        Random random = new Random();
+        //Random random = new Random();
         System.out.println(users);
         System.out.println("\nPlease Fill Out This Registration Form");
         System.out.println("-----------------");
@@ -150,9 +152,9 @@ public class LoginReg2{
             }
             
             // deposit initial balances
-            System.out.println("How much would you like to deposit into your checking accoount? ");
+            System.out.println("How much would you like to deposit into your checking accoount?");
             double checkingBalance = scanner.nextDouble();
-            System.out.println("How much would you like to deposit into your savings account? ");
+            System.out.println("How much would you like to deposit into your savings account?");
             double savingsBalance = scanner.nextDouble();
             
             // create new user file
@@ -221,7 +223,7 @@ public class LoginReg2{
         }
         return false;**/
         
-        String upath = "/Users/nyah/eclipse-workspace/ATM_1/src/ATM/userfiles/";
+        String upath = "src/ATM/userfiles/";
     	String file_ext = ".txt";
         String fname = upath + username + file_ext;
         try (Scanner fileScanner = new Scanner(new File(fname))) {
@@ -252,7 +254,7 @@ public class LoginReg2{
         System.out.println(users);
         
         System.out.println("Invalid username or password.\n");
-        return null;        // FIX LATER
+        return null;        // FIX LATER?
     }
 
     private static Object Readable (String fname) {
