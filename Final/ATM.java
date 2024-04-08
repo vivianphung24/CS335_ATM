@@ -2,6 +2,7 @@ package banking;
 
 import java.util.Scanner;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ArrayList;
@@ -14,29 +15,11 @@ public class ATM {
     public static void main(String[] args) throws IOException {
 
     	Scanner scanner = new Scanner(System.in);
+    	System.out.println("Welcome to the Simmons Bank ATM!");
     	//User user = LoginReg2.loginUser(scanner);
     	User user = LoginReg2.getUser();
-    	System.out.println("Welcome, " + user.getName() + ", to Baddie Banking ATM!");
 
-       /** System.out.println("Select an account:");
-        System.out.println("1. Checkings Account");
-        System.out.println("2. Savings Account");
-        System.out.print("Enter your choice: ");
-
-        int accountChoice = scanner.nextInt();
-
-        User user;
-
-        if (accountChoice == 1) {
-            user = new User(1000.0, 0);          // for now, start off with 1000 in account were dealing with
-        } else if (accountChoice == 2) {
-            user = new User(0, 1000.0);
-        } else {
-            System.out.println("Error: Invalid account choice");
-            return;
-        }    **/
-
-        TransactionHistory transaction = new TransactionHistory(); // Create an instance of the Transaction class
+       
 
         System.out.println("What would you like to do today?");
 
@@ -47,7 +30,8 @@ public class ATM {
             System.out.println("2. Withdraw");
             System.out.println("3. Deposit");
             System.out.println("4. Transfer");
-            System.out.println("5. Quit");
+            System.out.println("5. View Transaction History");
+            System.out.println("6. Quit");
             System.out.print("Enter your choice: ");
 
             try {
@@ -60,16 +44,19 @@ public class ATM {
                         break;
                     case 2:
                         double withdrawAmount = Withdraw.withdraw(user);
-                        transaction.addTransaction("Withdrawn: " + withdrawAmount); // Add the transaction to the Transaction object
+                       
                         break;
                     case 3:
                         double depositAmount = Deposit.deposit(user);
-                        transaction.addTransaction("Deposited: " + depositAmount); // Add the transaction to the Transaction object
+                      
                         break;
                     case 4:
-                        Transfer.transfer(user);
+                    	double transferAmount = Transfer.transfer(user);
                         break;
                     case 5:
+                    	viewTransactionHistory(user);
+                        break;
+                    case 6:
                         quit = true;
                         break;
                     default:
@@ -84,8 +71,16 @@ public class ATM {
             System.out.println();
         }
 
-        transaction.printTransactions(); // Print all the transactions made by the user
+      
 
         System.out.println("Thank you for using the ATM");
+    }
+    
+    public static void viewTransactionHistory(User user) {
+        System.out.println("Transaction History:");
+        List<String> transactionHistory = user.getTransactionHistory();
+        for (String transaction : transactionHistory) {
+            System.out.println(transaction);
+        }
     }
 }
