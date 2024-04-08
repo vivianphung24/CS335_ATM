@@ -2,9 +2,9 @@ package banking;
 
 import java.util.Scanner;
 
-public class Transfer implements Transaction{
+public class Transfer{
 
-    public static void transfer(User user) {
+    public static double transfer(User user) {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Select transfer type:");
@@ -24,6 +24,7 @@ public class Transfer implements Transaction{
             default:
                 System.out.println("Error: Invalid transfer choice");
         }
+		return 0;
     }
 
     private static void transferFromCheckingsToSavings(User user) {
@@ -35,6 +36,7 @@ public class Transfer implements Transaction{
         if (amount <= user.getCheckingBalance()) {
             user.setCheckingBalance(user.getCheckingBalance() - amount);
             System.out.println("Transfer successful. New checkings balance: $" + user.getCheckingBalance());
+            user.addTransaction("Transfered from Checkings to Savings : $" + amount); 
 
             // Update savings account balance
             user.setSavingsBalance(user.getSavingsBalance() + amount);
@@ -55,6 +57,7 @@ public class Transfer implements Transaction{
         if (amount <= user.getSavingsBalance()) {
             user.setSavingsBalance(user.getSavingsBalance() - amount);
             System.out.println("Transfer successful. New savings account balance: $" + user.getSavingsBalance());
+            user.addTransaction("Transfered from Savings to Checkings : $" + amount); 
 
             // Update checking account balance
             user.setCheckingBalance(user.getCheckingBalance() + amount);
@@ -64,4 +67,5 @@ public class Transfer implements Transaction{
         }
     }
 
+   
 }
