@@ -2,7 +2,7 @@ package banking;
 
 import java.util.Scanner;
 
-public abstract class Withdraw implements Transaction {
+public abstract class Withdraw {
 	
 	public static double withdraw(User user) {
 		
@@ -24,6 +24,7 @@ public abstract class Withdraw implements Transaction {
 		        double newBalance = balance - amount;
 		        user.setCheckingBalance(newBalance);
 		        System.out.println("Withdrawal successful. Remaining balance: $" + user.getCheckingBalance());
+		        user.addTransaction("Withdrawn from Checkings Account: $" + amount); 
 		        return(amount);
 		    }
         } else if (choice == 2) {
@@ -34,6 +35,7 @@ public abstract class Withdraw implements Transaction {
 		        double newBalance = balance - amount;
 		        user.setSavingsBalance(newBalance);
 		        System.out.println("Withdrawal successful. Remaining balance: $" + user.getSavingsBalance());
+		        user.addTransaction("Withdrawn from Savings Account: $" + amount); 
 		        return(amount);
 		    }
         } else {
