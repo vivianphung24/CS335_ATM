@@ -1,16 +1,20 @@
 package banking;
+import java.util.ArrayList;
+import java.util.List;
 
 public class User {
 	String name;
 	String password;
 	double checkingBal;
 	double savingsBal; 
+	List<String> transactionHistory;
 	
 	public User(double c,double s) {
 		// name = n;  String n, String pw as parameters once login class is integrated
 		// password = pw;
 		this.checkingBal = c;
 		this.savingsBal = s; 
+		this.transactionHistory = new ArrayList<>();
 	}
 	
 	// getters and setters; toString
@@ -50,7 +54,15 @@ public class User {
 		return (this.name + ", your checkings balance is: $" + this.checkingBal
 				+"\n saving balance is: $"+ this.savingsBal);
 	}
+	public void addTransaction(String transaction) {
+        transactionHistory.add(transaction);
+    }
 	
-	//methods
+	public List<String> getTransactionHistory() {
+        return transactionHistory;
+    }
+
+
+
 	
 }
