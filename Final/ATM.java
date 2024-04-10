@@ -22,6 +22,8 @@ public class ATM {
        
 
         System.out.println("What would you like to do today?");
+        String oldBal = Double.toString(user.getCheckingBalance());
+        
 
         boolean quit = false;
 
@@ -33,10 +35,15 @@ public class ATM {
             System.out.println("5. View Transaction History");
             System.out.println("6. Quit");
             System.out.print("Enter your choice: ");
-
+            
             try {
-
+            	String upath = "src/banking/userfile/";
+            	String file_ext = ".txt";
+                String fname = upath + user.getName() + file_ext;
+                
+               
                 int choice = scanner.nextInt();
+                
 
                 switch (choice) {
                     case 1:
@@ -57,6 +64,8 @@ public class ATM {
                     	viewTransactionHistory(user);
                         break;
                     case 6:
+                    	String newBal = Double.toString(user.getCheckingBalance()); 
+                    	modifyFile(fname, oldBal, newBal);
                         quit = true;
                         break;
                     default:
@@ -83,4 +92,60 @@ public class ATM {
             System.out.println(transaction);
         }
     }
+    static void modifyFile(String filePath, String oldString, String newString)
+    {
+        File fileToBeModified = new File(filePath);
+         
+        String oldBalance = "";
+         
+        BufferedReader reader = null;
+         
+        FileWriter writer = null;
+         
+        try
+        {
+            reader = new BufferedReader(new FileReader(fileToBeModified));
+             
+            //Reading all the lines of input text file into oldContent
+             
+            String line = reader.readLine();
+             
+            while (line != null) 
+            {
+                oldBalance = oldBalance + line + System.lineSeparator();
+                 
+                line = reader.readLine();
+            }
+             
+            //Replacing oldString with newString in the oldContent
+             
+            String newContent = oldBalance.replace(oldString, newString);
+             
+            //Rewriting the input text file with newContent
+             
+            writer = new FileWriter(fileToBeModified);
+             
+            writer.write(newContent);
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        finally
+        {
+            try
+            {
+                //Closing the resources
+                 
+                reader.close();
+                 
+                writer.close();
+            } 
+            catch (IOException e) 
+            {
+                e.printStackTrace();
+            }
+        }
+    }
+    
 }
