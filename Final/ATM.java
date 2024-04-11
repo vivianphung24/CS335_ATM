@@ -1,4 +1,5 @@
-package banking;
+
+      package banking;
 
 import java.util.Scanner;
 import java.util.InputMismatchException;
@@ -23,7 +24,7 @@ public class ATM {
 
         System.out.println("What would you like to do today?");
         String oldBal = Double.toString(user.getCheckingBalance());
-        
+        String oldSav = Double.toString(user.getSavingsBalance()); 
 
         boolean quit = false;
 
@@ -39,9 +40,8 @@ public class ATM {
             try {
             	String upath = "src/banking/userfile/";
             	String file_ext = ".txt";
-                String fname = upath + user.getName() + file_ext;
-                
-               
+                String fname = upath + user.getName() + file_ext;                         
+
                 int choice = scanner.nextInt();
                 
 
@@ -65,7 +65,9 @@ public class ATM {
                         break;
                     case 6:
                     	String newBal = Double.toString(user.getCheckingBalance()); 
+                    	String newSav = Double.toString(user.getSavingsBalance()); 
                     	modifyFile(fname, oldBal, newBal);
+                    	modifyFile(fname,oldSav,newSav); 
                         quit = true;
                         break;
                     default:
