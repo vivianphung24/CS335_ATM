@@ -66,8 +66,8 @@ public class ATM {
                     case 6:
                     	String newBal = Double.toString(user.getCheckingBalance()); 
                     	String newSav = Double.toString(user.getSavingsBalance()); 
-                    	modifyFile(fname, oldBal, newBal);
-                    	modifyFile(fname,oldSav,newSav); 
+                    	modifyFile(fname, "Checking: " + oldBal,"Checking: "+ newBal);
+                    	modifyFile(fname,"Savings: "+oldSav,"Savings: "+newSav); 
                         quit = true;
                         break;
                     default:
