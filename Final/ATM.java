@@ -1,5 +1,5 @@
 
-      package banking;
+package banking;
 
 import java.util.Scanner;
 import java.util.InputMismatchException;
@@ -16,7 +16,7 @@ public class ATM {
     public static void main(String[] args) throws IOException {
 
     	Scanner scanner = new Scanner(System.in);
-    	System.out.println("Welcome to the Simmons Bank ATM!");
+    	System.out.println("Welcome to Baddie Banking!");
     	//User user = LoginReg2.loginUser(scanner);
     	User user = LoginReg2.getUser();
 
