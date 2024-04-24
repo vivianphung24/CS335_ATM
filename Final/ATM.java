@@ -4,10 +4,7 @@ package banking;
 import java.util.Scanner;
 import java.util.InputMismatchException;
 import java.util.List;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.ArrayList;
-import java.util.Random;
+import java.time.LocalDate;
 // Import the File class
 import java.io.*;
 
@@ -17,6 +14,7 @@ public class ATM {
 
     	Scanner scanner = new Scanner(System.in);
     	System.out.println("Welcome to Baddie Banking!");
+    	//User user = LoginReg2.loginUser(scanner);
     	User user = LoginReg2.getUser();
 
        
@@ -37,7 +35,7 @@ public class ATM {
             System.out.print("Enter your choice: ");
             
             try {
-            	String upath = "src/banking/userfile/";
+            	String upath = "src/banking/userfiles/";
             	String file_ext = ".txt";
                 String fname = upath + user.getName() + file_ext;                         
 
@@ -86,8 +84,11 @@ public class ATM {
         System.out.println("Thank you for using the ATM");
     }
     
+    //Function to print transaction history for user
+    
     public static void viewTransactionHistory(User user) {
-        System.out.println("Transaction History:");
+    	LocalDate date = LocalDate.now(); // Create a date object
+        System.out.println("\nTransaction History for " + date+ ":");
         List<String> transactionHistory = user.getTransactionHistory();
         for (String transaction : transactionHistory) {
             System.out.println(transaction);
