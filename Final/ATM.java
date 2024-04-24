@@ -17,7 +17,6 @@ public class ATM {
 
     	Scanner scanner = new Scanner(System.in);
     	System.out.println("Welcome to Baddie Banking!");
-    	//User user = LoginReg2.loginUser(scanner);
     	User user = LoginReg2.getUser();
 
        
