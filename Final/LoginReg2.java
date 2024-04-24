@@ -73,15 +73,12 @@ public class LoginReg2{
                     registerUser(scanner);
                     break;
                 case 2:
-                    /** if (loginUser(scanner)) {
-                        ATM.main(args);
-                        return; **/
-                	
-                	User user = loginUser(scanner);
-                	if (user != null) {
-                		LoginReg2.setUser(user);
-                		ATM.main(args);
-                		return;
+                   
+			User user = loginUser(scanner);
+			if (user != null) {
+				LoginReg2.setUser(user);
+				ATM.main(args);
+				return;
                 	}
                     break;
                 case 3:
@@ -91,15 +88,11 @@ public class LoginReg2{
             }
 
             try {
-               // FileInputStream readData = new FileInputStream(ufile);
-               // ObjectInputStream readStream = new ObjectInputStream(readData);
+            
             	fileIn =new FileInputStream(ufile); 
             	props.load(fileIn);
             	fileIn.close(); 
             
-                //users = (HashMap<String, String>) readStream.readObject();
-
-                //readStream.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -178,14 +171,6 @@ public class LoginReg2{
 
             try {
                 
-                /** fileIn = new FileInputStream(ufile);
-                props.load(fileIn);
-                for (String uname : props.stringPropertyNames()) {
-                	String pw = props.getProperty(uname);
-                	users.put(uname, pw);
-                }
-                fileIn.close(); MOVED TO THE TOP **/
-                // props.putAll(users);
                 fileOut = new FileOutputStream(ufile,true);
                 props.store(fileOut, "usernames");
                 fileOut.close();
@@ -211,18 +196,6 @@ public class LoginReg2{
         String password = scanner.nextLine();
         System.out.println(users);
         
-        /**if (!props.containsKey(username)) {
-            System.out.println("Invalid username.\n");
-        } else {
-            if (props.get(username).equals(password)) {
-                System.out.println("Login successful.\n");
-                return true;
-            } else {
-                System.out.println("Invalid username or password.\n");
-            }
-        }
-        return false;**/
-        
         String upath = "src/ATM/userfiles/";
     	String file_ext = ".txt";
         String fname = upath + username + file_ext;
@@ -244,21 +217,14 @@ public class LoginReg2{
         	System.out.println("User not found. Make sure to register first as a new user.");
         }
         
-        /**if (users.containsKey(username)) {
-        	//User user = new User(checkingBalance, savingsBalance);       // have to read in from file their account information
-        	user.setName(username);
-        	if (user.getPassword().equals(password)) {
-        		System.out.println("Login successful.\n");
-        		return user;
-        	}**/
+     
         System.out.println(users);
         
         System.out.println("Invalid username or password.\n");
-        return null;        // FIX LATER?
+        return null;    
     }
 
     private static Object Readable (String fname) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
