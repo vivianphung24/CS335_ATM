@@ -236,11 +236,11 @@ public class LoginReg2{
         System.out.println(users);
         
         System.out.println("Invalid username or password.\n");
-        return null;        // FIX LATER?
+        return null;       
     }
 
     private static Object Readable (String fname) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
