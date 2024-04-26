@@ -31,7 +31,7 @@ public class LoginReg2{
     static FileOutputStream fileOut = null;
     static FileInputStream fileIn = null;
     static Properties props = new Properties();
-    static File ufile = new File ("src/ATM/account.properties");
+    static File ufile = new File ("src/banking/account.properties");
 
     public static void main(String[] args) throws IOException {
     	
@@ -66,42 +66,53 @@ public class LoginReg2{
             System.out.println("1. Register new user");
             System.out.println("2. Login");
             System.out.println("3. Quit");
-            choice = scanner.nextInt();
-            scanner.nextLine();
-            switch (choice) {
-                case 1:
-                    registerUser(scanner);
-                    break;
-                case 2:
-                   
-			User user = loginUser(scanner);
-			if (user != null) {
-				LoginReg2.setUser(user);
-				ATM.main(args);
-				return;
-                	}
-                    break;
-                case 3:
-                    break;
-                default:
-                    System.out.println("Invalid choice");
+            
+            try {
+                choice = scanner.nextInt();
+                scanner.nextLine();
+                switch (choice) {
+                    case 1:
+                        registerUser(scanner);
+                        break;
+                    case 2:
+                        User user = loginUser(scanner);
+                        if (user != null) {
+                            LoginReg2.setUser(user);
+                            ATM.main(args);
+                            return;
+                        }
+                        break;
+                    case 3:
+                        break;
+                    default:
+                        System.out.println("Invalid choice. Please select an option again.");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid choice. Please enter a valid number option.");
+                scanner.next(); // clear the invalid input
             }
+        }
+    
+
 
             try {
-            
+               
             	fileIn =new FileInputStream(ufile); 
             	props.load(fileIn);
             	fileIn.close(); 
             
+                //users = (HashMap<String, String>) readStream.readObject();
+
+                //readStream.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-        scanner.close();
-    }
+        
+    
 
     static void registerUser(Scanner scanner) {
-    	String upath = "src/ATM/userfiles/";
+    	String upath = "src/banking/userfiles/";
     	String file_ext = ".txt";
     	
         //Random random = new Random();
@@ -125,8 +136,10 @@ public class LoginReg2{
 
         while (true) {
             // Get password
+        	
             System.out.print("Create a Password: ");
             String password = scanner.nextLine();
+            
 
             // Validate password length
             if (password.length() < 8) {
@@ -170,7 +183,7 @@ public class LoginReg2{
             
 
             try {
-                
+               
                 fileOut = new FileOutputStream(ufile,true);
                 props.store(fileOut, "usernames");
                 fileOut.close();
@@ -196,7 +209,9 @@ public class LoginReg2{
         String password = scanner.nextLine();
         System.out.println(users);
         
-        String upath = "src/ATM/userfiles/";
+      
+        
+        String upath = "src/banking/userfiles/";
     	String file_ext = ".txt";
         String fname = upath + username + file_ext;
         try (Scanner fileScanner = new Scanner(new File(fname))) {
@@ -204,7 +219,7 @@ public class LoginReg2{
         	double savingsBalance = Double.parseDouble(fileScanner.nextLine().split(": ")[1]);
         	User user = new User(checkingBalance, savingsBalance);
         	if (users.containsKey(username)) {
-            	//User user = new User(checkingBalance, savingsBalance);       // have to read in from file their account information
+            	 // have to read in from file their account information
             	user.setName(username);
             	String rpassword = users.get(username);
             	user.setPassword(rpassword);
@@ -217,14 +232,15 @@ public class LoginReg2{
         	System.out.println("User not found. Make sure to register first as a new user.");
         }
         
-     
+       
         System.out.println(users);
         
         System.out.println("Invalid username or password.\n");
-        return null;    
+        return null;        // FIX LATER?
     }
 
     private static Object Readable (String fname) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
