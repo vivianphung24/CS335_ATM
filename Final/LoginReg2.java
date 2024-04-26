@@ -60,6 +60,7 @@ public class LoginReg2{
     	
     	// MAIN
         Scanner scanner = new Scanner(System.in);
+	System.out.println("Welcome to Baddie Banking!");
         int choice = 0;
         while (choice != 3) {
             System.out.println("Select an option: ");
