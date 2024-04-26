@@ -13,12 +13,11 @@ public class ATM {
     public static void main(String[] args) throws IOException {
 
     	Scanner scanner = new Scanner(System.in);
-    	System.out.println("Welcome to Baddie Banking!");
     	//User user = LoginReg2.loginUser(scanner);
     	User user = LoginReg2.getUser();
 
        
-
+        System.out.println("Hi " + user.getName() +"!");
         System.out.println("What would you like to do today?");
         String oldBal = Double.toString(user.getCheckingBalance());
         String oldSav = Double.toString(user.getSavingsBalance()); 
