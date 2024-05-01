@@ -80,7 +80,7 @@ public class ATM {
 
       
 
-        System.out.println("Thank you for using the ATM");
+        System.out.println("Thank you for using Baddie Banking. Stay Bad!");
     }
     
     //Function to print transaction history for user
