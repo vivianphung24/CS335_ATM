@@ -234,7 +234,7 @@ public class LoginReg2{
         }
         
        
-        System.out.println(users);
+       // System.out.println(users);
         
         System.out.println("Invalid username or password.\n");
         return null;       
@@ -250,7 +250,6 @@ public class LoginReg2{
         return "Users{" +
                 "Username='" + usern + '\'' +
                 ", lastName='" + pass + '\'' +
-                ", birthYear=" + account +
                 "}\n";
     }
 }
