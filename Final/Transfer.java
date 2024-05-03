@@ -13,7 +13,7 @@ public class Transfer{
         System.out.print("Enter your choice: ");
 
         int transferChoice = scanner.nextInt();
-
+        
         switch (transferChoice) {
             case 1:
                 transferFromCheckingsToSavings(user);
@@ -29,13 +29,13 @@ public class Transfer{
 
     private static void transferFromCheckingsToSavings(User user) {
         Scanner scanner = new Scanner(System.in);
-
         System.out.print("Enter the amount to transfer: ");
+         
         double amount = scanner.nextDouble();
-
+        //scanner.close();
         if (amount <= user.getCheckingBalance()) {
             user.setCheckingBalance(user.getCheckingBalance() - amount);
-            System.out.println("Transfer successful. New checkings balance: $" + user.getCheckingBalance());
+            System.out.println("Transfer successful. \nNew checkings balance: $" + user.getCheckingBalance());
             user.addTransaction("Transfered from Checkings to Savings : $" + amount); 
 
             // Update savings account balance
@@ -50,13 +50,14 @@ public class Transfer{
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Enter the amount to transfer: ");
+        
         double amount = scanner.nextDouble();
-
+        //scanner.close(); 
         //User savingsAccount = Savings(user);
 
         if (amount <= user.getSavingsBalance()) {
             user.setSavingsBalance(user.getSavingsBalance() - amount);
-            System.out.println("Transfer successful. New savings account balance: $" + user.getSavingsBalance());
+            System.out.println("Transfer successful. \nNew savings account balance: $" + user.getSavingsBalance());
             user.addTransaction("Transfered from Savings to Checkings : $" + amount); 
 
             // Update checking account balance
@@ -69,3 +70,4 @@ public class Transfer{
 
    
 }
+         
