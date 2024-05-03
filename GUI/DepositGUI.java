@@ -45,7 +45,7 @@ public class DepositGUI extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1056, 778);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(241, 195, 219));
+		contentPane.setBackground(new Color(241, 219, 232));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
