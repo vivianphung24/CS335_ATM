@@ -5,12 +5,12 @@ import java.util.*;
 public class LoginReg2{
     private String usern;
     private String pass;
-    private int account;
 
-    public LoginReg2(String usern, String pass, int account) {
+
+    public LoginReg2(String usern, String pass) {
         this.usern = usern;
         this.pass = pass;
-        this.account = account;
+        
        
     }
     
@@ -116,8 +116,7 @@ public class LoginReg2{
     	String upath = "src/banking/userfiles/";
     	String file_ext = ".txt";
     	
-        //Random random = new Random();
-        System.out.println(users);
+        //Random random = new Random()
         System.out.println("\nPlease Fill Out This Registration Form");
         System.out.println("-----------------");
 
@@ -208,7 +207,6 @@ public class LoginReg2{
         String username = scanner.nextLine();
         System.out.println("Enter your password:");
         String password = scanner.nextLine();
-        System.out.println(users);
         
       
         
